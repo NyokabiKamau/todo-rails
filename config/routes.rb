@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post '/create', to: "tasks#create"
   put '/update/:id', to: "tasks#update"
   delete '/destroy/:id', to: "tasks#delete"
+  post '/login', to: "users#login"
+  
 end

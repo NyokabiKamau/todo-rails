@@ -1,16 +1,26 @@
 class TasksController < ApplicationController
     
     def get_tasks
-       render json: Task.all
+        email = session[:email]
+        if email
+            render json: Task.all
+        else
+            render json: { message: "Not authorized"}, status: 401
+        end
     end
 
     def create
 
-        todo = Task.create(todo_params)
-        if todo.valid?
-            render json:todo, serializer: TaskSerializer
+        user = cookies[:email]
+        if user
+            task = Task.create(task_params)
+            if task.valid?
+                render json:task, serializer: TaskSerializer
+            else
+                render json: task.errors
+            end
         else
-            render json: todo.errors
+            render json: { message: "you are not logged in"}, status: 401
         end
 
     end

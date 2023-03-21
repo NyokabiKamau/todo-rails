@@ -18,6 +18,19 @@ class UsersController < ApplicationController
         render json: {message: "User sucessfully updated"}
     end
 
+    def login
+        email = params[:email]
+        session[:email] = email
+        render json: { message: "You are logged out" }
+    end
+
+    # Add Logout
+
+    def logout
+        email = params[:email]
+        session[:email] = 
+    end
+
     # TODO delete, show
     
     private
