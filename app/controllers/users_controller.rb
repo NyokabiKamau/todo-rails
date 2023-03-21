@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(user_params)
+        cookies[:email] = user.email
         render json: { data: user, message: "User sucessfully created"}
     end
 

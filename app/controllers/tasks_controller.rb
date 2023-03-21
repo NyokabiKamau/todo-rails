@@ -5,15 +5,13 @@ class TasksController < ApplicationController
     end
 
     def create
-        # title = task_params[:title]
-        # description = task_params[:description]
-        # priority = task_params[:priority]
 
-        # # add task to DB
-        # task = Task.create(title: title, description: description, priority: priority)
-
-        task = Task.create(task_params)
-        render json: task
+        todo = Task.create(todo_params)
+        if todo.valid?
+            render json:todo, serializer: TaskSerializer
+        else
+            render json: todo.errors
+        end
 
     end
 
